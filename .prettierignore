@@ -1,0 +1,16 @@
+node_modules
+lib
+dist
+build
+coverage
+*.min.js
+*.min.css
+package-lock.json
+yarn.lock
+.git
+.vscode
+.idea
+*.log
+plugins
+src-gen
+gen-webpack.config.js

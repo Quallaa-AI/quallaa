@@ -1,0 +1,37 @@
+/* *****************************************************************************
+ * Copyright (C) 2025 Jeff Toffoli and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ * **************************************************************************** */
+
+/*
+ * KB View Mode CSS - Main Entry Point
+ *
+ * Imports all KB View styling components.
+ * These classes are applied to the body element based on current mode.
+ */
+
+/* Phase 6: CSS Variables & Color Palette */
+@import './variables.css';
+
+/* Phase 5: Activity Bar Filtering */
+@import './activity-bar.css';
+
+/* Phase 6: Layout & Component Styling */
+@import './layout.css';
+
+/* Phase 6: Monaco Editor Customization */
+@import './editor.css';
+
+/* Phase 6: Transitions & Animations */
+@import './transitions.css';
+
+/* Phase 7: Menu & Command Filtering */
+@import './menu-filter.css';
+
+/* Phase 7.5: User Customization */
+@import './customization.css';

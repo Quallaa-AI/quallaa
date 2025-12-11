@@ -1,0 +1,258 @@
+/* *****************************************************************************
+ * Copyright (C) 2025 Jeff Toffoli and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ * **************************************************************************** */
+
+/*
+ * KB View Layout & Component Styling (Phase 6)
+ *
+ * Styles for shell layout, sidebars, file tree, and panels.
+ * Creates warm, document-focused aesthetic in KB View mode.
+ */
+
+/* =============================================================================
+ * Application Shell
+ * ============================================================================= */
+
+body.kb-view-mode .theia-ApplicationShell {
+    background: var(--kb-bg-secondary);
+    font-family: var(--kb-font-ui);
+}
+
+/* =============================================================================
+ * Sidebars & Panels
+ * ============================================================================= */
+
+/* Left Sidebar (File Tree area) */
+body.kb-view-mode .theia-app-left .theia-side-panel {
+    background: var(--kb-bg-secondary);
+    border-right: 1px solid var(--kb-border-subtle);
+}
+
+/* Right Sidebar (KB widgets area) */
+body.kb-view-mode .theia-app-right .theia-side-panel {
+    background: var(--kb-bg-secondary);
+    border-left: 1px solid var(--kb-border-subtle);
+}
+
+/* Panel Titles */
+body.kb-view-mode .theia-side-panel .p-TabBar-tabLabel,
+body.kb-view-mode .theia-panel-title {
+    font-family: var(--kb-font-ui);
+    font-size: var(--kb-font-size-normal);
+    font-weight: 600;
+    color: var(--kb-text-secondary);
+    padding: var(--kb-space-md) var(--kb-space-lg);
+}
+
+/* Panel Content */
+body.kb-view-mode .theia-side-panel .theia-widget-content {
+    background: var(--kb-bg-secondary);
+    padding: var(--kb-space-sm);
+}
+
+/* Hide close buttons on panels (cleaner look) */
+body.kb-view-mode .theia-side-panel .p-TabBar-tabCloseIcon {
+    opacity: 0.3;
+}
+
+body.kb-view-mode .theia-side-panel .p-TabBar-tab:hover .p-TabBar-tabCloseIcon {
+    opacity: 1;
+}
+
+/* =============================================================================
+ * Activity Bar
+ * ============================================================================= */
+
+body.kb-view-mode .theia-app-left .p-TabBar.theia-app-sides {
+    background: var(--kb-bg-tertiary);
+    border-right: 1px solid var(--kb-border-subtle);
+}
+
+/* Activity Bar Icons */
+body.kb-view-mode .theia-app-sides .p-TabBar-tab {
+    border-radius: var(--kb-radius-lg);
+    margin: var(--kb-space-xs);
+    transition:
+        background-color 0.2s ease,
+        transform 0.15s ease;
+}
+
+body.kb-view-mode .theia-app-sides .p-TabBar-tab:hover {
+    background: var(--kb-bg-hover);
+    transform: scale(1.05);
+}
+
+body.kb-view-mode .theia-app-sides .p-TabBar-tab.p-mod-current {
+    background: var(--kb-accent-primary);
+    color: var(--kb-bg-primary);
+}
+
+/* =============================================================================
+ * File Tree
+ * ============================================================================= */
+
+body.kb-view-mode .theia-FileTree {
+    background: var(--kb-bg-secondary);
+    color: var(--kb-text-primary);
+    padding: var(--kb-space-sm);
+    font-family: var(--kb-font-ui);
+    font-size: var(--kb-font-size-normal);
+}
+
+/* Tree Nodes */
+body.kb-view-mode .theia-FileTree .theia-TreeNode {
+    padding: var(--kb-space-xs) var(--kb-space-md);
+    margin: 2px 0;
+    border-radius: var(--kb-radius-sm);
+    transition: background-color 0.15s ease;
+}
+
+body.kb-view-mode .theia-FileTree .theia-TreeNode:hover {
+    background: var(--kb-bg-hover);
+}
+
+/* Selected Tree Node */
+body.kb-view-mode .theia-FileTree .theia-TreeNode.theia-mod-selected {
+    background: var(--kb-bg-selected);
+    border-left: 3px solid var(--kb-accent-primary);
+    padding-left: calc(var(--kb-space-md) - 3px);
+}
+
+/* Tree Node Focus */
+body.kb-view-mode .theia-FileTree .theia-TreeNode.theia-mod-focus {
+    outline: 2px solid var(--kb-accent-primary);
+    outline-offset: -2px;
+}
+
+/* File/Folder Icons */
+body.kb-view-mode .theia-FileTree .theia-TreeNodeSegment {
+    color: var(--kb-text-primary);
+}
+
+body.kb-view-mode .theia-FileTree .theia-file-icon {
+    color: var(--kb-accent-light);
+}
+
+/* Expand/Collapse Icons */
+body.kb-view-mode .theia-FileTree .theia-ExpansionToggle {
+    color: var(--kb-text-muted);
+}
+
+/* =============================================================================
+ * Bottom Panel (Terminal, Output, Problems)
+ * ============================================================================= */
+
+/* Hide bottom panel in KB View for cleaner interface */
+body.kb-view-mode #theia-bottom-content-panel {
+    /* Bottom panel is hidden via Activity Bar filtering */
+    /* This ensures proper styling if manually opened */
+    background: var(--kb-bg-secondary);
+    border-top: 1px solid var(--kb-border-subtle);
+}
+
+/* =============================================================================
+ * Main Editor Area
+ * ============================================================================= */
+
+body.kb-view-mode .theia-app-center {
+    background: var(--kb-bg-primary);
+}
+
+/* Editor Tabs */
+body.kb-view-mode #theia-main-content-panel .p-TabBar {
+    background: var(--kb-bg-secondary);
+    border-bottom: 1px solid var(--kb-border-subtle);
+}
+
+body.kb-view-mode #theia-main-content-panel .p-TabBar-tab {
+    background: transparent;
+    color: var(--kb-text-secondary);
+    padding: var(--kb-space-sm) var(--kb-space-lg);
+    border-radius: var(--kb-radius-sm) var(--kb-radius-sm) 0 0;
+    transition: background-color 0.15s ease;
+}
+
+body.kb-view-mode #theia-main-content-panel .p-TabBar-tab:hover {
+    background: var(--kb-bg-hover);
+}
+
+body.kb-view-mode #theia-main-content-panel .p-TabBar-tab.p-mod-current {
+    background: var(--kb-bg-primary);
+    color: var(--kb-text-primary);
+    border-bottom: 2px solid var(--kb-accent-primary);
+}
+
+/* Tab Labels */
+body.kb-view-mode #theia-main-content-panel .p-TabBar-tabLabel {
+    font-family: var(--kb-font-ui);
+    font-size: var(--kb-font-size-normal);
+}
+
+/* =============================================================================
+ * Status Bar
+ * ============================================================================= */
+
+body.kb-view-mode #theia-statusBar {
+    background: var(--kb-bg-tertiary);
+    border-top: 1px solid var(--kb-border-subtle);
+    color: var(--kb-text-secondary);
+    font-family: var(--kb-font-ui);
+    font-size: var(--kb-font-size-small);
+}
+
+body.kb-view-mode #theia-statusBar .element {
+    padding: 0 var(--kb-space-md);
+}
+
+/* =============================================================================
+ * Scrollbars
+ * ============================================================================= */
+
+body.kb-view-mode ::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+body.kb-view-mode ::-webkit-scrollbar-track {
+    background: var(--kb-bg-secondary);
+}
+
+body.kb-view-mode ::-webkit-scrollbar-thumb {
+    background: var(--kb-border-medium);
+    border-radius: var(--kb-radius-sm);
+    border: 2px solid var(--kb-bg-secondary);
+}
+
+body.kb-view-mode ::-webkit-scrollbar-thumb:hover {
+    background: var(--kb-accent-light);
+}
+
+/* =============================================================================
+ * Context Menus & Dropdowns
+ * ============================================================================= */
+
+body.kb-view-mode .p-Menu {
+    background: var(--kb-bg-primary);
+    border: 1px solid var(--kb-border-subtle);
+    border-radius: var(--kb-radius-md);
+    box-shadow: var(--kb-shadow-medium);
+}
+
+body.kb-view-mode .p-Menu-item {
+    padding: var(--kb-space-sm) var(--kb-space-lg);
+    color: var(--kb-text-primary);
+}
+
+body.kb-view-mode .p-Menu-item:hover {
+    background: var(--kb-bg-hover);
+}
+
+body.kb-view-mode .p-Menu-item.p-mod-active {
+    background: var(--kb-bg-selected);
+}

@@ -1,0 +1,67 @@
+/********************************************************************************
+ * Copyright (C) 2025 Jeff Toffoli
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * This Source Code may also be made available under the following Secondary
+ * Licenses when the conditions for such availability set forth in the Eclipse
+ * Public License v. 2.0 are satisfied: GNU General Public License, version 2
+ * with the GNU Classpath Exception which is available at
+ * https://www.gnu.org/software/classpath/license.html.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
+ ********************************************************************************/
+
+.theia-backlinks-widget {
+    padding: 8px;
+}
+
+.backlinks-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.backlink-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.backlink-source {
+    font-weight: 600;
+    padding: 4px 8px;
+    cursor: pointer;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.backlink-source:hover {
+    background-color: var(--theia-list-hoverBackground);
+}
+
+.backlink-count {
+    color: var(--theia-descriptionForeground);
+    font-weight: normal;
+    font-size: 0.9em;
+}
+
+.backlink-item {
+    padding: 4px 8px 4px 24px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 0.9em;
+    color: var(--theia-descriptionForeground);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.backlink-item:hover {
+    background-color: var(--theia-list-hoverBackground);
+    color: var(--theia-foreground);
+}

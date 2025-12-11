@@ -1,0 +1,204 @@
+/* *****************************************************************************
+ * Copyright (C) 2025 Jeff Toffoli and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ * **************************************************************************** */
+
+/*
+ * Activity Bar Filtering (Phase 5)
+ *
+ * Controls which Activity Bar icons are visible based on view mode.
+ * Uses CSS to hide/show icons for instant mode switching without JavaScript overhead.
+ *
+ * KB View Mode: Shows knowledge management focused icons
+ * Developer Mode: Shows full IDE development tools
+ */
+
+/* =============================================================================
+ * KB View Mode: Hide Developer-Focused Icons
+ * ============================================================================= */
+
+/* Hide Debug icon in KB View */
+body.kb-view-mode .p-TabBar-tab[data-id='debug'],
+body.kb-view-mode [id*='shell-tab-debug'] {
+    display: none !important;
+}
+
+/* Hide Source Control (SCM) icon in KB View */
+body.kb-view-mode .p-TabBar-tab[data-id='scm'],
+body.kb-view-mode [id*='shell-tab-scm'],
+body.kb-view-mode [id*='shell-tab-plugin-view-container:scm'] {
+    display: none !important;
+}
+
+/* Hide Extensions icon in KB View */
+body.kb-view-mode .p-TabBar-tab[data-id='plugin-view'],
+body.kb-view-mode .p-TabBar-tab[data-id='extensions'],
+body.kb-view-mode [id*='shell-tab-plugin-view'],
+body.kb-view-mode [id*='shell-tab-extensions'] {
+    display: none !important;
+}
+
+/* Hide Search icon in KB View (Explorer search is enough) */
+body.kb-view-mode .p-TabBar-tab[data-id='search-view-container'],
+body.kb-view-mode [id*='shell-tab-search-view'] {
+    display: none !important;
+}
+
+/* Hide Output panel in KB View */
+body.kb-view-mode .p-TabBar-tab[data-id='output'],
+body.kb-view-mode [id*='shell-tab-output'] {
+    display: none !important;
+}
+
+/* Hide Problems panel in KB View */
+body.kb-view-mode .p-TabBar-tab[data-id='problems'],
+body.kb-view-mode [id*='shell-tab-problems'] {
+    display: none !important;
+}
+
+/* Hide Terminal in KB View (focus on notes, not terminal) */
+body.kb-view-mode .p-TabBar-tab[data-id='terminal'],
+body.kb-view-mode [id*='shell-tab-terminal'] {
+    display: none !important;
+}
+
+/* =============================================================================
+ * KB View Mode: Ensure KB Widgets Are Visible
+ * ============================================================================= */
+
+/* Ensure Explorer is visible in KB View */
+body.kb-view-mode .p-TabBar-tab[data-id='explorer-view-container'],
+body.kb-view-mode [id*='shell-tab-explorer-view'] {
+    display: flex !important;
+}
+
+/* Ensure Tags widget is visible in KB View */
+body.kb-view-mode .p-TabBar-tab[data-id='tags-widget'],
+body.kb-view-mode [id*='shell-tab-tags'] {
+    display: flex !important;
+}
+
+/* Ensure Backlinks widget is visible in KB View */
+body.kb-view-mode .p-TabBar-tab[data-id='backlinks-widget'],
+body.kb-view-mode [id*='shell-tab-backlinks'] {
+    display: flex !important;
+}
+
+/* Ensure Knowledge Graph widget is visible in KB View */
+body.kb-view-mode .p-TabBar-tab[data-id='knowledge-graph'],
+body.kb-view-mode [id*='shell-tab-knowledge-graph'] {
+    display: flex !important;
+}
+
+/* Ensure AI Chat is visible in KB View (useful for knowledge work) */
+body.kb-view-mode .p-TabBar-tab[data-id='ai-chat'],
+body.kb-view-mode [id*='shell-tab-ai-chat'] {
+    display: flex !important;
+}
+
+/* =============================================================================
+ * Developer Mode: Hide KB-Specific Widgets
+ * ============================================================================= */
+
+/* Hide Tags widget in Developer mode */
+body.developer-mode .p-TabBar-tab[data-id='tags-widget'],
+body.developer-mode [id*='shell-tab-tags'] {
+    display: none !important;
+}
+
+/* Hide Backlinks widget in Developer mode */
+body.developer-mode .p-TabBar-tab[data-id='backlinks-widget'],
+body.developer-mode [id*='shell-tab-backlinks'] {
+    display: none !important;
+}
+
+/* Hide Knowledge Graph widget in Developer mode */
+body.developer-mode .p-TabBar-tab[data-id='knowledge-graph'],
+body.developer-mode [id*='shell-tab-knowledge-graph'] {
+    display: none !important;
+}
+
+/* =============================================================================
+ * Developer Mode: Ensure Developer Tools Are Visible
+ * ============================================================================= */
+
+/* Ensure Explorer is visible in Developer mode */
+body.developer-mode .p-TabBar-tab[data-id='explorer-view-container'],
+body.developer-mode [id*='shell-tab-explorer-view'] {
+    display: flex !important;
+}
+
+/* Ensure Search is visible in Developer mode */
+body.developer-mode .p-TabBar-tab[data-id='search-view-container'],
+body.developer-mode [id*='shell-tab-search-view'] {
+    display: flex !important;
+}
+
+/* Ensure Debug is visible in Developer mode */
+body.developer-mode .p-TabBar-tab[data-id='debug'],
+body.developer-mode [id*='shell-tab-debug'] {
+    display: flex !important;
+}
+
+/* Ensure SCM is visible in Developer mode */
+body.developer-mode .p-TabBar-tab[data-id='scm'],
+body.developer-mode [id*='shell-tab-scm'] {
+    display: flex !important;
+}
+
+/* Ensure Extensions is visible in Developer mode */
+body.developer-mode .p-TabBar-tab[data-id='plugin-view'],
+body.developer-mode .p-TabBar-tab[data-id='extensions'],
+body.developer-mode [id*='shell-tab-plugin-view'] {
+    display: flex !important;
+}
+
+/* Ensure AI Chat is visible in Developer mode */
+body.developer-mode .p-TabBar-tab[data-id='ai-chat'],
+body.developer-mode [id*='shell-tab-ai-chat'] {
+    display: flex !important;
+}
+
+/* Ensure Output is visible in Developer mode */
+body.developer-mode .p-TabBar-tab[data-id='output'],
+body.developer-mode [id*='shell-tab-output'] {
+    display: flex !important;
+}
+
+/* Ensure Problems is visible in Developer mode */
+body.developer-mode .p-TabBar-tab[data-id='problems'],
+body.developer-mode [id*='shell-tab-problems'] {
+    display: flex !important;
+}
+
+/* Ensure Terminal is visible in Developer mode */
+body.developer-mode .p-TabBar-tab[data-id='terminal'],
+body.developer-mode [id*='shell-tab-terminal'] {
+    display: flex !important;
+}
+
+/* =============================================================================
+ * Smooth Transitions
+ * ============================================================================= */
+
+/* Smooth opacity transition when icons appear/disappear */
+.p-TabBar-tab {
+    transition:
+        opacity 0.15s ease,
+        transform 0.15s ease;
+}
+
+/* =============================================================================
+ * Accessibility: Ensure Hidden Elements Are Properly Announced
+ * ============================================================================= */
+
+/* Hidden tabs should not be keyboard accessible */
+.p-TabBar-tab[style*='display: none'] {
+    pointer-events: none;
+    visibility: hidden;
+}

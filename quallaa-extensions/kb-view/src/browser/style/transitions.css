@@ -1,0 +1,133 @@
+/* *****************************************************************************
+ * Copyright (C) 2025 Jeff Toffoli and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ * **************************************************************************** */
+
+/*
+ * KB View Transitions (Phase 6)
+ *
+ * Smooth mode switching and interaction animations.
+ * Instant mode switching with selective element transitions.
+ */
+
+/* =============================================================================
+ * Disable Transitions During Mode Switch
+ * ============================================================================= */
+
+/*
+ * When switching modes, temporarily disable all transitions
+ * to prevent flash/jank from thousands of elements animating simultaneously.
+ * The ViewModeService adds this class during mode switch.
+ */
+body.no-transition,
+body.no-transition * {
+    transition: none !important;
+    animation: none !important;
+}
+
+/* =============================================================================
+ * Selective Element Transitions
+ * ============================================================================= */
+
+/*
+ * Only high-level elements have transitions.
+ * This prevents performance issues from animating thousands of DOM nodes.
+ */
+
+/* Shell-level transitions */
+body {
+    transition: background-color 0.2s ease;
+}
+
+/* Panel transitions */
+.theia-side-panel {
+    transition: background-color 0.2s ease;
+}
+
+/* File tree transitions */
+.theia-FileTree {
+    transition: background-color 0.2s ease;
+}
+
+.theia-FileTree .theia-TreeNode {
+    transition: background-color 0.15s ease;
+}
+
+/* Activity bar transitions */
+.theia-app-sides .p-TabBar-tab {
+    transition:
+        background-color 0.2s ease,
+        transform 0.15s ease;
+}
+
+/* Editor tab transitions */
+#theia-main-content-panel .p-TabBar-tab {
+    transition: background-color 0.15s ease;
+}
+
+/* =============================================================================
+ * Hover & Interaction Animations
+ * ============================================================================= */
+
+/* Tree node hover animation */
+.theia-TreeNode:hover {
+    transition: background-color 0.15s ease;
+}
+
+/* Activity bar icon hover */
+.theia-app-sides .p-TabBar-tab:hover {
+    transition:
+        background-color 0.2s ease,
+        transform 0.15s ease;
+}
+
+/* Button hover */
+button:hover {
+    transition: background-color 0.2s ease;
+}
+
+/* =============================================================================
+ * Focus Animations
+ * ============================================================================= */
+
+/* Focus ring animation */
+*:focus {
+    transition: outline 0.15s ease;
+}
+
+/* =============================================================================
+ * Scroll Smoothing
+ * ============================================================================= */
+
+/* Smooth scrolling for KB View */
+body.kb-view-mode {
+    scroll-behavior: smooth;
+}
+
+body.kb-view-mode .theia-FileTree,
+body.kb-view-mode .monaco-editor {
+    scroll-behavior: smooth;
+}
+
+/* =============================================================================
+ * Loading States
+ * ============================================================================= */
+
+/* Fade in for dynamically loaded content */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.2s ease;
+}

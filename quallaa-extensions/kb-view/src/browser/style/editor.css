@@ -1,0 +1,155 @@
+/* *****************************************************************************
+ * Copyright (C) 2025 Jeff Toffoli and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ * **************************************************************************** */
+
+/*
+ * KB View Editor Styling (Phase 6)
+ *
+ * Monaco editor customization for document-focused experience.
+ * Serif fonts for markdown, generous spacing, warm colors.
+ */
+
+/* =============================================================================
+ * Editor Container
+ * ============================================================================= */
+
+body.kb-view-mode .monaco-editor {
+    background: var(--kb-bg-primary) !important;
+}
+
+/* Editor Gutter (Line Numbers Area) */
+body.kb-view-mode .monaco-editor .margin {
+    background: var(--kb-bg-secondary);
+}
+
+/* Line Numbers */
+body.kb-view-mode .monaco-editor .line-numbers {
+    color: var(--kb-text-muted);
+    font-family: var(--kb-font-mono);
+    font-size: var(--kb-font-size-small);
+}
+
+/* =============================================================================
+ * Markdown Content (Serif Typography)
+ * ============================================================================= */
+
+/* Markdown files use serif font for readability */
+body.kb-view-mode .monaco-editor[data-mode-id='markdown'] .view-lines {
+    font-family: var(--kb-font-content);
+    font-size: var(--kb-font-size-medium);
+    line-height: var(--kb-line-height-relaxed);
+    color: var(--kb-text-primary);
+}
+
+/* Add generous padding for document feel */
+body.kb-view-mode .monaco-editor[data-mode-id='markdown'] .view-lines {
+    padding: var(--kb-space-xxl) var(--kb-space-xl);
+}
+
+/* Markdown headings styling */
+body.kb-view-mode .monaco-editor[data-mode-id='markdown'] .mtk1 {
+    color: var(--kb-text-primary);
+}
+
+/* =============================================================================
+ * Code Content (Monospace Typography)
+ * ============================================================================= */
+
+/* Non-markdown files use monospace */
+body.kb-view-mode .monaco-editor:not([data-mode-id='markdown']) .view-lines {
+    font-family: var(--kb-font-mono);
+    font-size: var(--kb-font-size-normal);
+    line-height: var(--kb-line-height-normal);
+}
+
+/* =============================================================================
+ * Selection & Cursor
+ * ============================================================================= */
+
+/* Text Selection */
+body.kb-view-mode .monaco-editor .selected-text {
+    background: var(--kb-bg-selected) !important;
+}
+
+body.kb-view-mode .monaco-editor .focused .selected-text {
+    background: var(--kb-bg-selected) !important;
+}
+
+/* Cursor */
+body.kb-view-mode .monaco-editor .cursor {
+    background: var(--kb-accent-primary);
+}
+
+/* Current Line Highlight */
+body.kb-view-mode .monaco-editor .current-line {
+    background: var(--kb-bg-secondary);
+    border: none;
+}
+
+/* =============================================================================
+ * Minimap
+ * ============================================================================= */
+
+/* Hide minimap in KB View for cleaner look */
+body.kb-view-mode .monaco-editor .minimap {
+    display: none;
+}
+
+/* =============================================================================
+ * Widgets & Overlays
+ * ============================================================================= */
+
+/* Suggest Widget (Autocomplete) */
+body.kb-view-mode .monaco-editor .suggest-widget {
+    background: var(--kb-bg-primary);
+    border: 1px solid var(--kb-border-subtle);
+    border-radius: var(--kb-radius-md);
+    box-shadow: var(--kb-shadow-medium);
+}
+
+body.kb-view-mode .monaco-editor .suggest-widget .monaco-list-row {
+    color: var(--kb-text-primary);
+}
+
+body.kb-view-mode .monaco-editor .suggest-widget .monaco-list-row.focused {
+    background: var(--kb-bg-hover);
+}
+
+/* Find Widget */
+body.kb-view-mode .monaco-editor .find-widget {
+    background: var(--kb-bg-secondary);
+    border: 1px solid var(--kb-border-subtle);
+    border-radius: var(--kb-radius-md);
+    box-shadow: var(--kb-shadow-medium);
+}
+
+/* Hover Widget */
+body.kb-view-mode .monaco-editor .monaco-hover {
+    background: var(--kb-bg-primary);
+    border: 1px solid var(--kb-border-subtle);
+    border-radius: var(--kb-radius-md);
+    box-shadow: var(--kb-shadow-medium);
+}
+
+/* =============================================================================
+ * Scrollbars (Editor-Specific)
+ * ============================================================================= */
+
+body.kb-view-mode .monaco-editor .monaco-scrollable-element > .scrollbar {
+    background: var(--kb-bg-secondary);
+}
+
+body.kb-view-mode .monaco-editor .monaco-scrollable-element > .scrollbar > .slider {
+    background: var(--kb-border-medium);
+    border-radius: var(--kb-radius-sm);
+}
+
+body.kb-view-mode .monaco-editor .monaco-scrollable-element > .scrollbar > .slider:hover {
+    background: var(--kb-accent-light);
+}

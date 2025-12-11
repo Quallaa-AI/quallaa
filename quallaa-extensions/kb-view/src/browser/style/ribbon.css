@@ -1,0 +1,87 @@
+/* Ribbon Widget - Obsidian-style vertical action bar */
+
+.quallaa-ribbon-widget {
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+    background-color: var(--theia-activityBar-background, #333333);
+    border-right: 1px solid var(--theia-activityBar-border, #454545);
+}
+
+/* Hide the tab header to make it look like a permanent fixture */
+.quallaa-ribbon-widget > .p-TabBar {
+    display: none;
+}
+
+.quallaa-ribbon-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 8px 0;
+}
+
+.quallaa-ribbon-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.quallaa-ribbon-action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: none;
+    border-radius: 4px;
+    background: transparent;
+    color: var(--theia-activityBar-foreground, #ffffff);
+    opacity: 0.7;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.quallaa-ribbon-action:hover {
+    background-color: var(--theia-activityBar-activeBackground, rgba(255, 255, 255, 0.1));
+    opacity: 1;
+}
+
+.quallaa-ribbon-action:active {
+    transform: scale(0.95);
+}
+
+.quallaa-ribbon-action:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--theia-focusBorder, #007acc);
+}
+
+.quallaa-ribbon-action i {
+    font-size: 18px;
+}
+
+.quallaa-ribbon-separator {
+    width: 24px;
+    height: 1px;
+    background-color: var(--theia-activityBar-border, #454545);
+    margin: 8px 0;
+}
+
+/* KB View mode specific styling */
+.kb-view-mode .quallaa-ribbon-widget {
+    background-color: var(--kb-bg-secondary, #f8f6f3);
+    border-right-color: var(--kb-border-subtle, #e8e4df);
+}
+
+.kb-view-mode .quallaa-ribbon-action {
+    color: var(--kb-text-primary, #2e2e2e);
+}
+
+.kb-view-mode .quallaa-ribbon-action:hover {
+    background-color: var(--kb-bg-hover, rgba(0, 0, 0, 0.05));
+}
+
+.kb-view-mode .quallaa-ribbon-separator {
+    background-color: var(--kb-border-subtle, #e8e4df);
+}

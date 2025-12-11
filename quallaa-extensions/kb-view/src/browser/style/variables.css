@@ -1,0 +1,136 @@
+/* *****************************************************************************
+ * Copyright (C) 2025 Jeff Toffoli and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ * **************************************************************************** */
+
+/*
+ * KB View CSS Variables (Phase 6)
+ *
+ * Defines color palette, typography, and spacing for KB View mode.
+ * Warm, document-focused aesthetic inspired by Obsidian.
+ */
+
+/* =============================================================================
+ * KB View Mode - Light Theme
+ * ============================================================================= */
+
+body.kb-view-mode {
+    /* Background Colors (Warm Neutrals) */
+    --kb-bg-primary: #ffffff;
+    --kb-bg-secondary: #faf8f5;
+    --kb-bg-tertiary: #f0ebe3;
+    --kb-bg-hover: #e8dfd0;
+    --kb-bg-selected: #d8cfc0;
+
+    /* Text Colors */
+    --kb-text-primary: #2c2c2c;
+    --kb-text-secondary: #5a4a3a;
+    --kb-text-muted: #8a7a6a;
+    --kb-text-accent: #8b7355;
+
+    /* Accent Colors (Warm Brown/Tan) */
+    --kb-accent-primary: #8b7355;
+    --kb-accent-hover: #6d5a43;
+    --kb-accent-light: #c4b5a0;
+    --kb-accent-subtle: #e0d8cc;
+
+    /* Border Colors */
+    --kb-border-subtle: #e8e0d0;
+    --kb-border-medium: #d0c8b8;
+    --kb-border-strong: #8b7355;
+
+    /* State Colors */
+    --kb-state-hover: #e8dfd0;
+    --kb-state-active: #d8cfc0;
+    --kb-state-focus: #8b7355;
+
+    /* Typography */
+    --kb-font-content: 'Georgia', 'Palatino', 'Times New Roman', serif;
+    --kb-font-ui: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica', sans-serif;
+    --kb-font-mono: 'Monaco', 'Menlo', 'Consolas', 'Courier New', monospace;
+
+    /* Font Sizes */
+    --kb-font-size-small: 12px;
+    --kb-font-size-normal: 14px;
+    --kb-font-size-medium: 16px;
+    --kb-font-size-large: 18px;
+    --kb-font-size-xlarge: 24px;
+
+    /* Line Heights */
+    --kb-line-height-tight: 1.4;
+    --kb-line-height-normal: 1.5;
+    --kb-line-height-relaxed: 1.6;
+    --kb-line-height-loose: 1.8;
+
+    /* Spacing */
+    --kb-space-xs: 4px;
+    --kb-space-sm: 8px;
+    --kb-space-md: 12px;
+    --kb-space-lg: 16px;
+    --kb-space-xl: 24px;
+    --kb-space-xxl: 32px;
+
+    /* Border Radius */
+    --kb-radius-sm: 4px;
+    --kb-radius-md: 6px;
+    --kb-radius-lg: 8px;
+
+    /* Shadows */
+    --kb-shadow-subtle: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --kb-shadow-medium: 0 2px 4px rgba(0, 0, 0, 0.08);
+    --kb-shadow-strong: 0 4px 8px rgba(0, 0, 0, 0.12);
+}
+
+/* =============================================================================
+ * KB View Mode - Dark Theme
+ * ============================================================================= */
+
+body.kb-view-mode.theia-dark {
+    /* Background Colors (Dark Warm) */
+    --kb-bg-primary: #1e1e1e;
+    --kb-bg-secondary: #252525;
+    --kb-bg-tertiary: #2d2d2d;
+    --kb-bg-hover: #353535;
+    --kb-bg-selected: #3d3d3d;
+
+    /* Text Colors (Light on Dark) */
+    --kb-text-primary: #e0e0e0;
+    --kb-text-secondary: #c0c0c0;
+    --kb-text-muted: #8a8a8a;
+    --kb-text-accent: #c4a57b;
+
+    /* Accent Colors (Warm Tan) */
+    --kb-accent-primary: #c4a57b;
+    --kb-accent-hover: #d4b58b;
+    --kb-accent-light: #8a7a5a;
+    --kb-accent-subtle: #3a342e;
+
+    /* Border Colors (Subtle in Dark) */
+    --kb-border-subtle: #2d2d2d;
+    --kb-border-medium: #404040;
+    --kb-border-strong: #c4a57b;
+
+    /* State Colors */
+    --kb-state-hover: #353535;
+    --kb-state-active: #3d3d3d;
+    --kb-state-focus: #c4a57b;
+
+    /* Shadows (Darker) */
+    --kb-shadow-subtle: 0 1px 2px rgba(0, 0, 0, 0.2);
+    --kb-shadow-medium: 0 2px 4px rgba(0, 0, 0, 0.3);
+    --kb-shadow-strong: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* =============================================================================
+ * Developer Mode - Uses Theia Defaults
+ * ============================================================================= */
+
+body.developer-mode {
+    /* Developer mode inherits standard Theia CSS variables */
+    /* No custom overrides needed - uses out-of-the-box Theia styling */
+}

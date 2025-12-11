@@ -1,0 +1,215 @@
+/********************************************************************************
+ * Copyright (C) 2025 Jeff Toffoli
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * This Source Code may also be made available under the following Secondary
+ * Licenses when the conditions for such availability set forth in the Eclipse
+ * Public License v. 2.0 are satisfied: GNU General Public License, version 2
+ * with the GNU Classpath Exception which is available at
+ * https://www.gnu.org/software/classpath/license.html.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
+ ********************************************************************************/
+
+.theia-tags-widget {
+    padding: 8px;
+    overflow-y: auto;
+}
+
+.tags-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Header and Stats */
+.tags-header {
+    padding: 8px;
+    background-color: var(--theia-sideBar-background);
+    border-radius: 3px;
+    border: 1px solid var(--theia-panel-border);
+}
+
+.tags-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 0.9em;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--theia-descriptionForeground);
+}
+
+.stat-item .codicon {
+    font-size: 1.1em;
+}
+
+/* Tags List */
+.tags-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+/* Individual Tag Item */
+.tag-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 8px;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: background-color 0.1s ease;
+}
+
+.tag-item:hover {
+    background-color: var(--theia-list-hoverBackground);
+}
+
+.tag-item .codicon {
+    font-size: 14px;
+    color: var(--theia-symbolIcon-colorForeground);
+    flex-shrink: 0;
+}
+
+.tag-label {
+    flex: 1;
+    font-size: 0.95em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.tag-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 18px;
+    padding: 0 6px;
+    background-color: var(--theia-badge-background);
+    color: var(--theia-badge-foreground);
+    border-radius: 9px;
+    font-size: 0.8em;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+/* Parent Tag (Hierarchical) */
+.tag-parent-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.tag-parent-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 8px;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: background-color 0.1s ease;
+}
+
+.tag-parent-header:hover {
+    background-color: var(--theia-list-hoverBackground);
+}
+
+.tag-parent-header .codicon {
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+.tag-parent-label {
+    flex: 1;
+    font-size: 0.95em;
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.tag-children {
+    margin-left: 8px;
+    border-left: 2px solid var(--theia-panel-border);
+}
+
+/* Notes List (when tag is selected) */
+.tags-notes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    border-top: 2px solid var(--theia-panel-border);
+    padding-top: 12px;
+}
+
+.tags-notes-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px;
+    background-color: var(--theia-sideBar-background);
+    border-radius: 3px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.1s ease;
+}
+
+.tags-notes-header:hover {
+    background-color: var(--theia-list-hoverBackground);
+}
+
+.tags-notes-header .codicon {
+    font-size: 14px;
+}
+
+.notes-count {
+    margin-left: auto;
+    color: var(--theia-descriptionForeground);
+    font-weight: normal;
+    font-size: 0.9em;
+}
+
+/* Individual Note Item */
+.tags-note-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 8px;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: background-color 0.1s ease;
+}
+
+.tags-note-item:hover {
+    background-color: var(--theia-list-hoverBackground);
+}
+
+.tags-note-item .codicon {
+    font-size: 14px;
+    color: var(--theia-symbolIcon-fileForeground);
+    flex-shrink: 0;
+}
+
+.note-title {
+    flex: 1;
+    font-size: 0.95em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Empty State */
+.theia-widget-noInfo {
+    padding: 16px;
+    text-align: center;
+    color: var(--theia-descriptionForeground);
+    font-style: italic;
+}

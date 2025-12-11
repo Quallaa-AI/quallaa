@@ -1,0 +1,259 @@
+/********************************************************************************
+ * Copyright (C) 2020 EclipseSource and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the MIT License, which is available in the project root.
+ *
+ * SPDX-License-Identifier: MIT
+ ********************************************************************************/
+
+:root {
+    /* Default logo for light theme */
+    --theia-branding-logo: url(../icons/quallaa-logo-light.png);
+    --theia-branding-logo-square: url(../icons/quallaa-logo-square-512.png);
+}
+
+/* Dark theme: use light-colored logo on dark background */
+body.theia-dark,
+body.theia-hc {
+    --theia-branding-logo: url(../icons/quallaa-logo-dark.png);
+}
+
+/* Light theme: use dark-colored logo on light background */
+body.theia-light,
+body.theia-hcLight {
+    --theia-branding-logo: url(../icons/quallaa-logo-light.png);
+}
+
+.theia-icon {
+    background-image: var(--theia-branding-logo-square);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.gs-blue-header {
+    color: #5088e7;
+    text-transform: capitalize;
+    font-weight: 600;
+}
+
+.gs-text-bold {
+    font-weight: 600;
+}
+
+.gs-text-underline {
+    text-decoration: underline;
+}
+
+.gs-float {
+    float: right;
+    padding-left: 20px;
+}
+
+.gs-logo {
+    background-image: var(--theia-branding-logo);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 250px;
+    height: 55px; /* Adjusted for Quallaa logo aspect ratio (882:194 ≈ 4.5:1) */
+    padding: 20px;
+}
+
+.ad-logo {
+    background-image: var(--theia-branding-logo);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 250px;
+    height: 55px; /* Adjusted for Quallaa logo aspect ratio (882:194 ≈ 4.5:1) */
+    padding: 20px;
+}
+
+.ad-float {
+    float: right;
+}
+
+.ad-container {
+    padding: 20px;
+    width: 1150px;
+    height: 700;
+}
+
+ul.theia-aboutExtensions {
+    height: 450px;
+    overflow: hidden;
+    overflow-y: scroll;
+    list-style-type: none;
+    padding: 0;
+    margin-left: 10px;
+}
+
+/* Quallaa Welcome Screen Styles */
+.quallaa-welcome .gs-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.quallaa-welcome .gs-header h1 {
+    font-size: 2.5em;
+    font-weight: 300;
+    margin: 20px 0 10px;
+}
+
+.quallaa-welcome .gs-tagline {
+    font-size: 1.2em;
+    color: var(--theia-descriptionForeground);
+    font-style: italic;
+}
+
+/* Quick Actions */
+.gs-action-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.gs-action-button {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 20px;
+    text-align: left;
+    border: 1px solid var(--theia-widget-border);
+    background: var(--theia-editor-background);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.gs-action-button:hover {
+    background: var(--theia-list-hoverBackground);
+    border-color: var(--theia-focusBorder);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.gs-action-button i.codicon {
+    font-size: 24px;
+    color: var(--theia-textLink-foreground);
+}
+
+.gs-action-details {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.gs-action-title {
+    font-weight: 600;
+    font-size: 1.1em;
+}
+
+.gs-action-desc {
+    font-size: 0.9em;
+    color: var(--theia-descriptionForeground);
+}
+
+/* Features and Steps Lists */
+.gs-feature-list,
+.gs-steps-list {
+    margin: 15px 0;
+    padding-left: 25px;
+}
+
+.gs-feature-list li,
+.gs-steps-list li {
+    margin: 12px 0;
+    line-height: 1.6;
+}
+
+.gs-feature-list li strong,
+.gs-steps-list li strong {
+    color: var(--theia-textLink-foreground);
+}
+
+.gs-feature-list code,
+.gs-steps-list code {
+    background: var(--theia-editor-background);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+    font-size: 0.9em;
+}
+
+.gs-feature-list kbd,
+.gs-steps-list kbd {
+    background: var(--theia-editor-background);
+    border: 1px solid var(--theia-widget-border);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+    font-size: 0.85em;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Resources Links */
+.gs-links-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.gs-links-container a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    color: var(--theia-textLink-foreground);
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background 0.2s ease;
+}
+
+.gs-links-container a:hover {
+    background: var(--theia-list-hoverBackground);
+    text-decoration: underline;
+}
+
+.gs-links-container a i.codicon {
+    font-size: 18px;
+}
+
+/* Link-styled buttons (for accessibility) */
+.gs-link-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    color: var(--theia-textLink-foreground);
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background 0.2s ease;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    text-align: left;
+    width: 100%;
+}
+
+.gs-link-button:hover {
+    background: var(--theia-list-hoverBackground);
+    text-decoration: underline;
+}
+
+.gs-link-button i.codicon {
+    font-size: 18px;
+}
+
+/* Section Headers */
+.gs-section-header {
+    color: var(--theia-textLink-foreground);
+    font-weight: 600;
+    font-size: 1.3em;
+    margin-bottom: 15px;
+}

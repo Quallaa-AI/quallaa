@@ -1,0 +1,187 @@
+/********************************************************************************
+ * Copyright (C) 2025 Jeff Toffoli
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * This Source Code may also be made available under the following Secondary
+ * Licenses when the conditions for such availability set forth in the Eclipse
+ * Public License v. 2.0 are satisfied: GNU General Public License, version 2
+ * with the GNU Classpath Exception which is available at
+ * https://www.gnu.org/software/classpath/license.html.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
+ ********************************************************************************/
+
+.theia-graph-widget {
+    padding: 8px;
+}
+
+.graph-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.graph-summary {
+    padding: 8px;
+    background-color: var(--theia-sideBar-background);
+    border-radius: 3px;
+    border: 1px solid var(--theia-panel-border);
+}
+
+.graph-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 0.9em;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--theia-descriptionForeground);
+}
+
+.stat-item .codicon {
+    font-size: 1.1em;
+}
+
+.graph-node-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.graph-node-header {
+    font-weight: 600;
+    padding: 4px 8px;
+    cursor: pointer;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.graph-node-header:hover {
+    background-color: var(--theia-list-hoverBackground);
+}
+
+.graph-connection-count {
+    color: var(--theia-descriptionForeground);
+    font-weight: normal;
+    font-size: 0.9em;
+}
+
+.graph-connections {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-left: 8px;
+    padding-left: 12px;
+    border-left: 2px solid var(--theia-panel-border);
+}
+
+.graph-connection-item {
+    padding: 4px 8px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 0.9em;
+    color: var(--theia-descriptionForeground);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.graph-connection-item:hover {
+    background-color: var(--theia-list-hoverBackground);
+    color: var(--theia-foreground);
+}
+
+.graph-connection-item.placeholder {
+    cursor: default;
+    opacity: 0.7;
+}
+
+.graph-connection-item.placeholder:hover {
+    background-color: transparent;
+    color: var(--theia-descriptionForeground);
+}
+
+.graph-connection-item.placeholder .codicon {
+    color: var(--theia-editorWarning-foreground);
+}
+
+/* D3 Force-Directed Graph Styles */
+.graph-svg {
+    flex: 1;
+    min-height: 400px;
+    background-color: var(--theia-editor-background);
+    border: 1px solid var(--theia-panel-border);
+    border-radius: 3px;
+    cursor: grab;
+}
+
+.graph-svg:active {
+    cursor: grabbing;
+}
+
+.graph-link {
+    stroke: var(--theia-editorWidget-foreground);
+    stroke-opacity: 0.3;
+    stroke-width: 2px;
+}
+
+.graph-node {
+    cursor: pointer;
+}
+
+.graph-node circle {
+    transition: stroke-width 0.2s ease;
+}
+
+.graph-node:hover circle {
+    stroke-width: 3px !important;
+}
+
+.graph-node.note circle {
+    fill: var(--theia-activityBar-activeBorder);
+}
+
+.graph-node.placeholder circle {
+    fill: var(--theia-notificationsWarningIcon-foreground);
+    opacity: 0.7;
+}
+
+.graph-node-label {
+    font-family: var(--theia-ui-font-family);
+    font-size: 12px;
+    fill: var(--theia-editorWidget-foreground);
+    pointer-events: none;
+    user-select: none;
+}
+
+/* Zoom/Pan Instructions */
+.graph-container::after {
+    content: 'Drag to pan • Scroll to zoom • Click nodes to open';
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 4px 12px;
+    background-color: var(--theia-sideBar-background);
+    border: 1px solid var(--theia-panel-border);
+    border-radius: 3px;
+    font-size: 0.85em;
+    color: var(--theia-descriptionForeground);
+    pointer-events: none;
+    opacity: 0.8;
+}

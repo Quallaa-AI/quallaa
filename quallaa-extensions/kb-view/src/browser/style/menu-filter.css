@@ -1,0 +1,125 @@
+/* *****************************************************************************
+ * Copyright (C) 2025 Jeff Toffoli and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ * **************************************************************************** */
+
+/*
+ * KB View Menu Filtering (Phase 7)
+ *
+ * Hides developer-specific menu items in KB View mode.
+ * Hides KB View-specific menu items in Developer mode.
+ *
+ * Strategy: CSS-based hiding (more performant than rebuilding menus)
+ */
+
+/* =============================================================================
+ * Hide Developer Menus in KB View Mode
+ * ============================================================================= */
+
+/* Top-level menu items */
+body.kb-view-mode #theia\:menubar [aria-label*='Terminal'],
+body.kb-view-mode #theia\:menubar [aria-label*='Run'],
+body.kb-view-mode #theia\:menubar [aria-label*='Debug'] {
+    display: none !important;
+}
+
+/* View menu - Debug/Terminal/SCM items */
+body.kb-view-mode [id*='view-container-debug'],
+body.kb-view-mode [id*='view-container-terminal'],
+body.kb-view-mode [id*='view-container-scm'],
+body.kb-view-mode [id*='view-container-output'],
+body.kb-view-mode [id*='view-container-problems'] {
+    display: none !important;
+}
+
+/* Menu items containing developer keywords */
+body.kb-view-mode .p-Menu-item[data-command*='debug'],
+body.kb-view-mode .p-Menu-item[data-command*='terminal'],
+body.kb-view-mode .p-Menu-item[data-command*='scm'],
+body.kb-view-mode .p-Menu-item[data-command*='git'],
+body.kb-view-mode .p-Menu-item[data-command*='task'],
+body.kb-view-mode .p-Menu-item[data-command*='build'],
+body.kb-view-mode .p-Menu-item[data-command*='test'] {
+    display: none !important;
+}
+
+/* Specific command IDs */
+body.kb-view-mode [data-command='workbench.actions.view.problems'],
+body.kb-view-mode [data-command='workbench.action.output.toggleOutput'],
+body.kb-view-mode [data-command='workbench.action.tasks.build'],
+body.kb-view-mode [data-command='workbench.action.tasks.test'],
+body.kb-view-mode [data-command='workbench.action.tasks.runTask'] {
+    display: none !important;
+}
+
+/* =============================================================================
+ * Hide KB View Menus in Developer Mode
+ * ============================================================================= */
+
+/* KB View top-level menu */
+body.developer-mode #theia\:menubar [aria-label*='KB View'] {
+    display: none !important;
+}
+
+/* KB View submenu items */
+body.developer-mode .p-Menu-item[data-command*='kb-view'] {
+    display: none !important;
+}
+
+/* =============================================================================
+ * Command Palette Filtering
+ * ============================================================================= */
+
+/* Hide developer commands in command palette when in KB View */
+body.kb-view-mode .monaco-quick-open-entry[aria-label*='Debug'],
+body.kb-view-mode .monaco-quick-open-entry[aria-label*='Terminal'],
+body.kb-view-mode .monaco-quick-open-entry[aria-label*='Git'],
+body.kb-view-mode .monaco-quick-open-entry[aria-label*='SCM'],
+body.kb-view-mode .monaco-quick-open-entry[aria-label*='Task'] {
+    display: none !important;
+}
+
+/* Hide KB View commands in command palette when in Developer mode */
+body.developer-mode .monaco-quick-open-entry[aria-label*='KB View'],
+body.developer-mode .monaco-quick-open-entry[aria-label*='Knowledge Graph'],
+body.developer-mode .monaco-quick-open-entry[aria-label*='Daily Note'],
+body.developer-mode .monaco-quick-open-entry[aria-label*='Backlinks'],
+body.developer-mode .monaco-quick-open-entry[aria-label*='Tags'] {
+    display: none !important;
+}
+
+/* =============================================================================
+ * Context Menu Filtering
+ * ============================================================================= */
+
+/* Hide developer-specific context menu items in KB View */
+body.kb-view-mode .p-Menu.theia-context-menu [data-command*='debug'],
+body.kb-view-mode .p-Menu.theia-context-menu [data-command*='git'],
+body.kb-view-mode .p-Menu.theia-context-menu [data-command*='scm'] {
+    display: none !important;
+}
+
+/* =============================================================================
+ * Menu Separators Cleanup
+ * ============================================================================= */
+
+/*
+ * When menu items are hidden, orphaned separators can appear.
+ * Hide separators that are:
+ * - First child (no items above)
+ * - Last child (no items below)
+ * - Adjacent to another separator (consecutive separators)
+ */
+.p-Menu-itemSeparator:first-child,
+.p-Menu-itemSeparator:last-child {
+    display: none !important;
+}
+
+.p-Menu-itemSeparator + .p-Menu-itemSeparator {
+    display: none !important;
+}

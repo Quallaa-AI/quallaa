@@ -1,0 +1,100 @@
+{
+    "private": true,
+    "name": "quallaa",
+    "version": "1.67.0",
+    "description": "Quallaa - Knowledge-First IDE for Natural Language Developers",
+    "license": "EPL-2.0",
+    "author": "Quallaa AI <hello@quallaa.com>",
+    "homepage": "https://github.com/Quallaa-AI/quallaa#readme",
+    "bugs": {
+        "url": "https://github.com/Quallaa-AI/quallaa/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Quallaa-AI/quallaa.git"
+    },
+    "engines": {
+        "yarn": ">=1.7.0 <2",
+        "node": ">=20"
+    },
+    "devDependencies": {
+        "@playwright/test": "^1.56.1",
+        "@theia/cli": "1.66.2",
+        "@types/d3": "7.0.0",
+        "@types/yargs": "17.0.7",
+        "@typescript-eslint/eslint-plugin": "^4.25.0",
+        "@typescript-eslint/eslint-plugin-tslint": "^4.25.0",
+        "@typescript-eslint/parser": "^4.25.0",
+        "eslint": "^7.27.0",
+        "eslint-plugin-deprecation": "1.2.1",
+        "eslint-plugin-import": "^2.23.3",
+        "eslint-plugin-jsx-a11y": "^6.10.2",
+        "eslint-plugin-no-null": "^1.0.2",
+        "eslint-plugin-no-unsanitized": "^3.1.5",
+        "eslint-plugin-react": "^7.23.2",
+        "eslint-plugin-react-hooks": "^7.0.1",
+        "husky": "^9.1.7",
+        "lerna": "^6.0.1",
+        "lint-staged": "^16.2.6",
+        "markdownlint-cli": "^0.45.0",
+        "node-gyp": "^11.4.0",
+        "playwright": "^1.56.1",
+        "prettier": "^3.6.2",
+        "rimraf": "^2.7.1",
+        "ts-node": "^10.0.0",
+        "type-fest": "^0.20.2",
+        "yargs": "17.2.1"
+    },
+    "scripts": {
+        "clean": "lerna run clean && rimraf node_modules",
+        "build": "yarn build:extensions && yarn build:applications",
+        "build:dev": "yarn build:extensions && yarn build:applications:dev",
+        "build:applications": "yarn build:extensions && lerna run --scope=\"quallaa-*-app\" build:prod --concurrency 1",
+        "build:applications:dev": "yarn build:extensions && lerna run --scope=\"quallaa-*-app\" build --concurrency 1",
+        "build:extensions": "lerna run --scope=\"quallaa-*-ext\" build",
+        "download:plugins": "theia download:plugins --rate-limit=15 --parallel=false && yarn permissions:writeable",
+        "package:applications": "lerna run --scope=\"quallaa-*-app\" package --concurrency 1",
+        "package:applications:preview": "lerna run --scope=\"quallaa-*-app\" package:preview --concurrency 1",
+        "package:applications:prod": "lerna run --scope=\"quallaa-*-app\" package:prod --concurrency 1",
+        "permissions:writeable": "ts-node scripts/make-files-writeable.ts plugins",
+        "watch": "lerna run --parallel watch",
+        "test": "lerna run test",
+        "electron": "yarn --cwd applications/electron",
+        "browser": "yarn --cwd applications/browser",
+        "lint": "eslint --ext js,jsx,ts,tsx scripts && lerna run lint",
+        "lint:fix": "eslint --ext js,jsx,ts,tsx scripts --fix && lerna run lint:fix",
+        "lint:markdown": "markdownlint \"**/*.md\" --ignore node_modules --ignore lib",
+        "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,css,md,yml,yaml}\"",
+        "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,css,md,yml,yaml}\"",
+        "postinstall": "theia-patch",
+        "prepare": "husky"
+    },
+    "theiaPluginsDir": "plugins",
+    "theiaPlugins": {
+        "eclipse-theia.builtin-extension-pack": "https://open-vsx.org/api/eclipse-theia/builtin-extension-pack/1.95.3/file/eclipse-theia.builtin-extension-pack-1.95.3.vsix"
+    },
+    "theiaPluginsExcludeIds": [
+        "ms-vscode.js-debug-companion",
+        "VisualStudioExptTeam.vscodeintellicode",
+        "vscode.extension-editing",
+        "vscode.github",
+        "vscode.github-authentication",
+        "vscode.microsoft-authentication"
+    ],
+    "workspaces": [
+        "applications/*",
+        "quallaa-extensions/*"
+    ],
+    "resolutions": {
+        "@types/puppeteer": "^5.4.0",
+        "@yarnpkg/parsers": "3.0.0-rc.44",
+        "**/multer": "1.4.4-lts.1",
+        "**/nan": "2.23.0",
+        "**/cpu-features": "0.0.9",
+        "**/perfect-scrollbar": "1.5.5",
+        "**/node-abi": "4.14.0",
+        "**/d3": "6.7.0",
+        "**/@types/d3": "6.7.0",
+        "**/@types/d3-dispatch": "2.0.0"
+    }
+}

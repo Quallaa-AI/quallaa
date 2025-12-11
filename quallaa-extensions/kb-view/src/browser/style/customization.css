@@ -1,0 +1,122 @@
+/* *****************************************************************************
+ * Copyright (C) 2025 Jeff Toffoli and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ * **************************************************************************** */
+
+/*
+ * KB View Customization Styles (Phase 7.5)
+ *
+ * User-configurable styles applied via preferences.
+ * These styles are dynamically toggled by KBViewCustomizationService.
+ */
+
+/* =============================================================================
+ * Activity Bar Icon Visibility (User Preference)
+ * ============================================================================= */
+
+/* Hide Debug Icon */
+body.kb-view-mode.kb-hide-debug-icon .p-TabBar-tab[data-id*='debug'],
+body.kb-view-mode.kb-hide-debug-icon [id*='shell-tab-debug'] {
+    display: none !important;
+}
+
+/* Hide Terminal Icon */
+body.kb-view-mode.kb-hide-terminal-icon .p-TabBar-tab[data-id*='terminal'],
+body.kb-view-mode.kb-hide-terminal-icon [id*='shell-tab-terminal'] {
+    display: none !important;
+}
+
+/* Hide SCM Icon */
+body.kb-view-mode.kb-hide-scm-icon .p-TabBar-tab[data-id*='scm'],
+body.kb-view-mode.kb-hide-scm-icon [id*='shell-tab-scm'] {
+    display: none !important;
+}
+
+/* Hide Extensions Icon */
+body.kb-view-mode.kb-hide-extensions-icon .p-TabBar-tab[data-id*='extensions'],
+body.kb-view-mode.kb-hide-extensions-icon [id*='shell-tab-extensions'] {
+    display: none !important;
+}
+
+/* =============================================================================
+ * Panel Visibility (User Preference)
+ * ============================================================================= */
+
+/* Hide Bottom Panel */
+body.kb-view-mode.kb-hide-bottom-panel #theia-bottom-content-panel {
+    display: none !important;
+}
+
+/* Hide Minimap */
+body.kb-view-mode.kb-hide-minimap .monaco-editor .minimap {
+    display: none !important;
+}
+
+/* =============================================================================
+ * Sidebar Width Variables
+ * ============================================================================= */
+
+body.kb-view-mode {
+    /* Default sidebar widths (overridden by user preferences) */
+    --kb-left-sidebar-width: 300px;
+    --kb-right-sidebar-width: 300px;
+}
+
+/* Apply sidebar widths */
+body.kb-view-mode .theia-app-left .theia-side-panel {
+    width: var(--kb-left-sidebar-width);
+}
+
+body.kb-view-mode .theia-app-right .theia-side-panel {
+    width: var(--kb-right-sidebar-width);
+}
+
+/* =============================================================================
+ * Typography Customization
+ * ============================================================================= */
+
+/*
+ * Typography is customized via CSS variables set by KBViewCustomizationService:
+ * - --kb-font-content
+ * - --kb-font-size-medium
+ * - --kb-line-height-relaxed
+ *
+ * These are already consumed by editor.css, so no additional styles needed here.
+ */
+
+/* =============================================================================
+ * Color Theme Customization
+ * ============================================================================= */
+
+/*
+ * Colors are customized via CSS variables set by KBViewCustomizationService:
+ * - --kb-accent-primary (custom accent color)
+ * - --kb-bg-secondary (warm vs. cool palette)
+ * - --kb-bg-tertiary
+ * - --kb-bg-hover
+ *
+ * These are already consumed by variables.css and layout.css.
+ */
+
+/* =============================================================================
+ * Command/Menu Filtering State
+ * ============================================================================= */
+
+/* Disable command filtering (show all commands) */
+body.kb-view-mode.kb-command-filtering-disabled .p-Menu-item[data-command*='debug'],
+body.kb-view-mode.kb-command-filtering-disabled .p-Menu-item[data-command*='terminal'],
+body.kb-view-mode.kb-command-filtering-disabled .p-Menu-item[data-command*='git'] {
+    display: block !important;
+}
+
+/* Disable menu filtering (show all menus) */
+body.kb-view-mode.kb-menu-filtering-disabled #theia\:menubar [aria-label*='Terminal'],
+body.kb-view-mode.kb-menu-filtering-disabled #theia\:menubar [aria-label*='Run'],
+body.kb-view-mode.kb-menu-filtering-disabled #theia\:menubar [aria-label*='Debug'] {
+    display: block !important;
+}

@@ -1,0 +1,73 @@
+{
+    "private": true,
+    "name": "quallaa-knowledge-base-ext",
+    "version": "1.67.0",
+    "description": "Knowledge management features for Quallaa: wiki links, backlinks, graph view, tags",
+    "dependencies": {
+        "@tiptap/core": "^3.10.8",
+        "@tiptap/extension-image": "^3.10.8",
+        "@tiptap/extension-link": "^3.10.8",
+        "@tiptap/pm": "^3.10.8",
+        "@tiptap/react": "^3.10.8",
+        "@tiptap/starter-kit": "^3.10.8",
+        "@tiptap/suggestion": "^3.10.8",
+        "@tiptap/extension-table": "^3.10.8",
+        "@tiptap/extension-table-row": "^3.10.8",
+        "@tiptap/extension-table-cell": "^3.10.8",
+        "@tiptap/extension-table-header": "^3.10.8",
+        "@tiptap/extension-task-list": "^3.10.8",
+        "@tiptap/extension-task-item": "^3.10.8",
+        "tippy.js": "^6.3.7",
+        "chokidar": "^4.0.3",
+        "d3": "6.7.0",
+        "gray-matter": "^4.0.3",
+        "inversify": "^6.0.1",
+        "prosemirror-markdown": "^1.13.2",
+        "tiptap-markdown": "^0.9.0"
+    },
+    "devDependencies": {
+        "@types/chai": "^4.3.0",
+        "@types/d3": "6.7.0",
+        "@types/mocha": "^9.1.0",
+        "chai": "^4.3.10",
+        "mocha": "^10.0.0",
+        "rimraf": "^2.7.1",
+        "ts-node": "^10.0.0",
+        "typescript": "^4.5.5"
+    },
+    "peerDependencies": {
+        "@theia/core": "1.66.1",
+        "@theia/editor": "1.66.1",
+        "@theia/file-search": "1.66.1",
+        "@theia/filesystem": "1.66.1",
+        "@theia/monaco": "1.66.1",
+        "@theia/workspace": "1.66.1"
+    },
+    "theiaExtensions": [
+        {
+            "frontend": "lib/browser/knowledge-base-frontend-module",
+            "backend": "lib/node/knowledge-base-backend-module"
+        }
+    ],
+    "keywords": [
+        "theia-extension"
+    ],
+    "license": "EPL-2.0",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Quallaa-AI/quallaa.git"
+    },
+    "bugs": {
+        "url": "https://github.com/Quallaa-AI/quallaa/issues"
+    },
+    "homepage": "https://github.com/Quallaa-AI/quallaa",
+    "files": [
+        "lib",
+        "src"
+    ],
+    "scripts": {
+        "clean": "rimraf lib *.tsbuildinfo",
+        "build": "tsc -b",
+        "test": "mocha --require ts-node/register 'src/**/*.spec.ts'"
+    }
+}
