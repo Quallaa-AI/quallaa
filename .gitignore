@@ -47,3 +47,6 @@ coverage/
 # Temporary files
 *.tmp
 *.temp
+
+# Private documentation (not for public repo)
+knowledge-base/
