@@ -40,6 +40,8 @@ Eclipse Theia as a **standalone product** (not a fork).
 - Version: 1.67.0
 - License: EPL-2.0 (Open Core model)
 - Priority 1 complete (KB View default mode)
+- Obsidian UI parity implemented (ribbon, vault selector, navigation, status
+  bar)
 
 ---
 
@@ -96,6 +98,13 @@ The **crown jewel** of Quallaa - comprehensive knowledge management features.
 - Tags Browser: Hierarchical tags with counts
 - Daily Notes: Date-based note creation
 
+**Obsidian UI Parity (in knowledge-base):**
+
+- `KBNavigationToolbarContribution` - Back/forward navigation buttons in editor
+  toolbar
+- `KBStatusBarContribution` - Shows backlinks count, word count, character count
+  for markdown files
+
 **Backend Architecture:**
 
 - Indexing service - Indexes markdown files, builds link graph
@@ -113,10 +122,21 @@ Mode system for knowledge-first vs developer experience.
 - `KBViewWidgetManager` - Widget visibility management
 - `KBViewPreferences` - Configuration options
 
+**Obsidian UI Parity (in kb-view):**
+
+- `RibbonWidget` - Left sidebar with 6 Obsidian-style icons (toggle sidebar,
+  search, bookmarks, graph, templates, connections)
+- `VaultSelectorWidget` - Bottom of left sidebar showing workspace name with
+  help/settings buttons
+- `FileTreeToolbarContribution` - New Note, New Folder, Sort, Collapse All icons
+  above file tree
+
 **What KB View Mode Does:**
 
 - Hides developer UI (Terminal, Debug, SCM icons)
 - Shows Tags (left) + Backlinks (right) by default
+- Shows Ribbon widget on far left
+- Shows Vault Selector at bottom of left sidebar
 - Applies warm color palette, Georgia font
 - Hides .md extensions
 
@@ -352,7 +372,5 @@ yarn update:theia
 
 ---
 
-**Last Updated:** 2025-12-11
-**Quallaa Version:** 1.67.0
-**Based on Theia:** 1.66.2
-**Repository:** github.com/Quallaa-AI/quallaa
+**Last Updated:** 2025-12-12 **Quallaa Version:** 1.67.0 **Based on Theia:**
+1.66.2 **Repository:** github.com/Quallaa-AI/quallaa
