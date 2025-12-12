@@ -56,13 +56,6 @@ export class FileTreeToolbarContribution implements TabBarToolbarContribution, C
     @inject(MessageService)
     protected readonly messageService: MessageService;
 
-    constructor() {
-        console.log('[FileTreeToolbarContribution] Constructor called');
-    }
-
-    /**
-     * Check if the widget is the FileNavigatorWidget and we're in KB View mode
-     */
     protected isFileNavigatorInKBView(widget: Widget | undefined): boolean {
         if (!widget) {
             return false;
@@ -73,20 +66,12 @@ export class FileTreeToolbarContribution implements TabBarToolbarContribution, C
     }
 
     registerCommands(commands: CommandRegistry): void {
-        console.log('[FileTreeToolbarContribution] registerCommands called');
-        // Register New Note command
         commands.registerCommand(KBFileTreeCommands.NEW_NOTE, {
             execute: async () => {
-                // Execute the workspace new file command
-                // The file will be created with .md extension by default in KB View
                 try {
                     await commands.executeCommand(WorkspaceCommands.NEW_FILE.id);
-                    // Note: In a future enhancement, we could:
-                    // 1. Prompt for note name
-                    // 2. Automatically add .md extension
-                    // 3. Add default frontmatter
                 } catch (error) {
-                    console.error('[FileTreeToolbar] Failed to create new note:', error);
+                    console.error('Failed to create new note:', error);
                     this.messageService.error('Failed to create new note');
                 }
             },
@@ -94,35 +79,24 @@ export class FileTreeToolbarContribution implements TabBarToolbarContribution, C
             isVisible: () => this.viewModeService.currentMode === 'kb-view',
         });
 
-        // Register Sort Files command (placeholder)
         commands.registerCommand(KBFileTreeCommands.SORT_FILES, {
             execute: () => {
                 this.messageService.info('Sort options - Coming Soon!');
-                // Future: Show quick pick with sort options:
-                // - Name (A-Z)
-                // - Name (Z-A)
-                // - Modified (Newest)
-                // - Modified (Oldest)
-                // - Created (Newest)
-                // - Created (Oldest)
             },
             isEnabled: () => this.viewModeService.currentMode === 'kb-view',
             isVisible: () => this.viewModeService.currentMode === 'kb-view',
         });
-        console.log('[FileTreeToolbarContribution] Commands registered:', KBFileTreeCommands.NEW_NOTE.id, KBFileTreeCommands.SORT_FILES.id);
     }
 
     async registerToolbarItems(registry: TabBarToolbarRegistry): Promise<void> {
-        // New Note button - KB View specific (creates markdown note)
         registry.registerItem({
             id: KBFileTreeCommands.NEW_NOTE.id,
             command: KBFileTreeCommands.NEW_NOTE.id,
             tooltip: 'New Note',
-            priority: 0, // Leftmost
+            priority: 0,
             isVisible: widget => this.isFileNavigatorInKBView(widget),
         });
 
-        // New Folder button - uses Theia's built-in command
         registry.registerItem({
             id: 'kb-view.newFolder.toolbar',
             command: `${WorkspaceCommands.NEW_FOLDER.id}.toolbar`,
@@ -131,7 +105,6 @@ export class FileTreeToolbarContribution implements TabBarToolbarContribution, C
             isVisible: widget => this.isFileNavigatorInKBView(widget),
         });
 
-        // Sort button - KB View specific
         registry.registerItem({
             id: KBFileTreeCommands.SORT_FILES.id,
             command: KBFileTreeCommands.SORT_FILES.id,
@@ -141,7 +114,6 @@ export class FileTreeToolbarContribution implements TabBarToolbarContribution, C
             isVisible: widget => this.isFileNavigatorInKBView(widget),
         });
 
-        // Collapse All button - uses Theia's built-in command
         registry.registerItem({
             id: 'kb-view.collapseAll.toolbar',
             command: 'navigator.collapse.all',

@@ -74,7 +74,6 @@ export class RibbonWidget extends ReactWidget {
 
     @postConstruct()
     protected init(): void {
-        console.log('[RibbonWidget] @postConstruct init() called');
         this.id = RibbonWidget.ID;
         this.title.label = RibbonWidget.LABEL;
         this.title.caption = RibbonWidget.LABEL;
@@ -130,8 +129,6 @@ export class RibbonWidget extends ReactWidget {
                 onClick: () => this.showComingSoon('Connections'),
             },
         ];
-        console.log('[RibbonWidget] Actions set up, count:', this.actions.length);
-        // Trigger re-render to show actions
         this.update();
     }
 
@@ -157,7 +154,6 @@ export class RibbonWidget extends ReactWidget {
     };
 
     protected render(): React.ReactNode {
-        console.log('[RibbonWidget] render() called, actions count:', this.actions.length);
         return (
             <div className="quallaa-ribbon-container">
                 <div className="quallaa-ribbon-actions">

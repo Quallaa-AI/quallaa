@@ -50,28 +50,23 @@ export class VaultSelectorWidget extends ReactWidget {
 
     @postConstruct()
     protected init(): void {
-        console.log('[VaultSelectorWidget] @postConstruct init() called');
         this.id = VaultSelectorWidget.ID;
         this.title.label = VaultSelectorWidget.LABEL;
         this.title.caption = VaultSelectorWidget.LABEL;
         this.title.closable = false;
         this.addClass('quallaa-vault-selector-widget');
 
-        // Listen for workspace changes
         this.workspaceService.onWorkspaceChanged(() => {
             this.updateVaultInfo();
         });
 
-        // Initialize vault info
         this.updateVaultInfo();
     }
 
     protected updateVaultInfo(): void {
         const workspace = this.workspaceService.workspace;
         if (workspace) {
-            // workspace.resource is already a URI string
             const resourceStr = workspace.resource.toString();
-            // Extract the folder name from the path
             const parts = resourceStr.split('/');
             this.vaultName = parts[parts.length - 1] || 'Vault';
             this.vaultPath = resourceStr;
@@ -83,29 +78,26 @@ export class VaultSelectorWidget extends ReactWidget {
     }
 
     protected handleVaultClick = async (): Promise<void> => {
-        // Open folder picker to switch workspace/vault
         try {
             await this.commandService.executeCommand('workspace:openWorkspace');
-        } catch (error) {
-            console.error('[VaultSelectorWidget] Failed to open workspace:', error);
+        } catch {
+            // Command may not be available
         }
     };
 
     protected handleHelpClick = async (): Promise<void> => {
-        // Open help - could link to docs or show help widget
         try {
             await this.commandService.executeCommand(CommonCommands.ABOUT_COMMAND.id);
-        } catch (error) {
-            console.error('[VaultSelectorWidget] Failed to open help:', error);
+        } catch {
+            // Command may not be available
         }
     };
 
     protected handleSettingsClick = async (): Promise<void> => {
-        // Open settings
         try {
             await this.commandService.executeCommand(CommonCommands.OPEN_PREFERENCES.id);
-        } catch (error) {
-            console.error('[VaultSelectorWidget] Failed to open settings:', error);
+        } catch {
+            // Command may not be available
         }
     };
 

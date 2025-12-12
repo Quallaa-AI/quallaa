@@ -460,21 +460,14 @@ export class LayoutManagerImpl implements LayoutManager {
         const hasNewPreference = this.preferences.inspect<string>(this.CURRENT_LAYOUT_PREF);
 
         if (legacyMode && !hasNewPreference?.value) {
-            console.log('[LayoutManager] Migrating from legacy ViewMode:', legacyMode);
-
-            // Migrate legacy state to new layout state format
             const legacyStateKey = `kb-view.mode-state.${legacyMode}`;
             const legacyState = await this.storage.getData<ModeState>(legacyStateKey);
 
             if (legacyState) {
-                // Copy to new layout state key
                 await this.saveLayoutState(legacyMode, legacyState);
             }
 
-            // Set current layout preference
             await this.preferences.set(this.CURRENT_LAYOUT_PREF, legacyMode, PreferenceScope.User);
-
-            console.log('[LayoutManager] Migration complete');
         }
     }
 }

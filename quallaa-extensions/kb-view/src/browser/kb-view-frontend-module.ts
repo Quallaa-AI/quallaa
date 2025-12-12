@@ -61,8 +61,6 @@ import { VaultSelectorWidget, VAULT_SELECTOR_WIDGET_ID } from './vault-selector/
 import { FileTreeToolbarContribution } from './file-tree-toolbar-contribution';
 
 export default new ContainerModule(bind => {
-    console.log('[KB-VIEW] Frontend module loading...');
-
     // Preferences
     bind(PreferenceContribution).toConstantValue({ schema: KB_VIEW_PREFERENCES_SCHEMA });
 
@@ -120,6 +118,4 @@ export default new ContainerModule(bind => {
             createWidget: () => ctx.container.get<VaultSelectorWidget>(VaultSelectorWidget),
         }))
         .inSingletonScope();
-
-    console.log('[KB-VIEW] Frontend module loaded successfully');
 });

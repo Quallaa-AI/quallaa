@@ -26,41 +26,27 @@ import { EditorCommands } from '@theia/editor/lib/browser/editor-command';
  */
 @injectable()
 export class KBNavigationToolbarContribution implements TabBarToolbarContribution {
-
-    constructor() {
-        console.log('[KBNavigationToolbarContribution] Constructor called');
-    }
-
-    /**
-     * Check if the widget is an EditorWidget
-     */
     protected isEditorWidget(widget: Widget | undefined): boolean {
         return widget instanceof EditorWidget;
     }
 
     async registerToolbarItems(registry: TabBarToolbarRegistry): Promise<void> {
-        console.log('[KBNavigationToolbarContribution] registerToolbarItems called');
-
-        // Back button - navigate to previous location
         registry.registerItem({
             id: 'kb-navigation-back',
             command: EditorCommands.GO_BACK.id,
             icon: 'codicon-arrow-left',
             tooltip: 'Go Back',
-            priority: -100, // Far left
+            priority: -100,
             isVisible: widget => this.isEditorWidget(widget),
         });
 
-        // Forward button - navigate to next location
         registry.registerItem({
             id: 'kb-navigation-forward',
             command: EditorCommands.GO_FORWARD.id,
             icon: 'codicon-arrow-right',
             tooltip: 'Go Forward',
-            priority: -99, // After back button
+            priority: -99,
             isVisible: widget => this.isEditorWidget(widget),
         });
-
-        console.log('[KBNavigationToolbarContribution] Navigation toolbar items registered');
     }
 }

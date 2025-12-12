@@ -14,7 +14,7 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
+import { injectable, inject } from '@theia/core/shared/inversify';
 import { StatusBar, StatusBarAlignment, FrontendApplicationContribution } from '@theia/core/lib/browser';
 import { EditorManager, EditorWidget } from '@theia/editor/lib/browser';
 import { DisposableCollection } from '@theia/core/lib/common';
@@ -53,22 +53,13 @@ export class KBStatusBarContribution implements FrontendApplicationContribution 
     protected readonly toDispose = new DisposableCollection();
     protected currentEditorDisposables = new DisposableCollection();
 
-    @postConstruct()
-    protected init(): void {
-        console.log('[KBStatusBarContribution] @postConstruct init() called');
-    }
-
     async onStart(): Promise<void> {
-        console.log('[KBStatusBarContribution] onStart() called');
-
-        // Listen for active editor changes
         this.toDispose.push(
             this.editorManager.onActiveEditorChanged(editor => {
                 this.handleActiveEditorChanged(editor);
             })
         );
 
-        // Initialize with current active editor
         const currentEditor = this.editorManager.activeEditor;
         if (currentEditor) {
             this.handleActiveEditorChanged(currentEditor);
@@ -82,7 +73,6 @@ export class KBStatusBarContribution implements FrontendApplicationContribution 
     }
 
     protected handleActiveEditorChanged(editor: EditorWidget | undefined): void {
-        // Clear previous editor listeners
         this.currentEditorDisposables.dispose();
         this.currentEditorDisposables = new DisposableCollection();
 
@@ -91,19 +81,13 @@ export class KBStatusBarContribution implements FrontendApplicationContribution 
             return;
         }
 
-        // Check if this is a markdown file
         const uri = editor.editor.uri;
         if (!uri || !this.isMarkdownFile(uri.toString())) {
             this.clearStatusBarItems();
             return;
         }
 
-        // Update status bar for this editor
         this.updateStatusBar(editor);
-
-        // Note: For real-time word count updates as user types,
-        // we would need to use Monaco's model events directly.
-        // For now, we update when the active editor changes.
     }
 
     protected isMarkdownFile(uriString: string): boolean {
@@ -114,25 +98,19 @@ export class KBStatusBarContribution implements FrontendApplicationContribution 
     protected async updateStatusBar(editor: EditorWidget): Promise<void> {
         const content = editor.editor.document.getText();
         const uri = editor.editor.uri;
-
-        // Calculate word count
         const wordCount = this.countWords(content);
-
-        // Calculate character count
         const charCount = content.length;
 
-        // Get backlinks count
         let backlinkCount = 0;
         if (uri) {
             try {
                 const backlinks = await this.knowledgeBaseService.getBacklinks(uri.toString());
                 backlinkCount = backlinks.length;
-            } catch (error) {
-                console.warn('[KBStatusBarContribution] Failed to get backlinks:', error);
+            } catch {
+                // Backlinks service may not be available
             }
         }
 
-        // Update status bar items
         this.statusBar.setElement(KB_STATUS_BAR_IDS.BACKLINKS, {
             text: `$(link-external) ${backlinkCount} backlink${backlinkCount !== 1 ? 's' : ''}`,
             tooltip: 'Number of notes linking to this note',
@@ -156,15 +134,11 @@ export class KBStatusBarContribution implements FrontendApplicationContribution 
     }
 
     protected countWords(text: string): number {
-        // Remove markdown frontmatter
         const withoutFrontmatter = text.replace(/^---[\s\S]*?---\n?/, '');
-
-        // Split by whitespace and filter empty strings
         const words = withoutFrontmatter
-            .replace(/[#*_`~\[\]()]/g, ' ') // Remove markdown syntax
+            .replace(/[#*_`~\[\]()]/g, ' ')
             .split(/\s+/)
             .filter(word => word.length > 0);
-
         return words.length;
     }
 

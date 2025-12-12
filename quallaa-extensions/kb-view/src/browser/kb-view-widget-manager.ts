@@ -53,53 +53,31 @@ export class KBViewWidgetManager implements FrontendApplicationContribution {
 
     private initialized = false;
 
-    /**
-     * Required for FrontendApplicationContribution - called when frontend starts
-     */
     async onStart(): Promise<void> {
-        console.log('[KBViewWidgetManager] onStart() called');
         this.doInitialize();
     }
 
     @postConstruct()
     protected init(): void {
-        console.log('[KBViewWidgetManager] @postConstruct init() called');
-        // Also try to initialize here in case onStart isn't called first
         this.doInitialize();
     }
 
-    /**
-     * Initialize the widget manager - idempotent, can be called multiple times
-     */
     protected doInitialize(): void {
         if (this.initialized) {
-            console.log('[KBViewWidgetManager] Already initialized, skipping');
             return;
         }
         this.initialized = true;
 
-        console.log('[KBViewWidgetManager] Initializing - setting up mode change listener');
-
-        // Listen for mode changes
         this.viewModeService.onDidChangeMode(mode => {
-            console.log('[KBViewWidgetManager] Mode changed to:', mode);
             this.handleModeChange(mode);
         });
 
-        // Initialize widget state tracking
         for (const widgetId of Object.values(KB_WIDGET_IDS)) {
             this.kbWidgetState.set(widgetId, false);
         }
 
-        // Handle initial mode on startup (delay to ensure shell is ready)
-        const currentMode = this.viewModeService.currentMode;
-        console.log('[KBViewWidgetManager] Current mode:', currentMode);
-
         setTimeout(() => {
-            const delayedMode = this.viewModeService.currentMode;
-            console.log('[KBViewWidgetManager] Delayed check - current mode:', delayedMode);
-            if (delayedMode === 'kb-view') {
-                console.log('[KBViewWidgetManager] Already in KB View mode at startup, switching...');
+            if (this.viewModeService.currentMode === 'kb-view') {
                 this.switchToKBView();
             }
         }, 1000);
@@ -142,44 +120,27 @@ export class KBViewWidgetManager implements FrontendApplicationContribution {
         await this.closeKBWidgets();
     }
 
-    /**
-     * Open all KB widgets (Ribbon, Tags, Backlinks)
-     */
     private async openKBWidgets(): Promise<void> {
-        console.log('[KBViewWidgetManager] Opening KB widgets...');
-
-        // Open ribbon widget in the left sidebar (far left position)
+        // Open ribbon widget in the left sidebar
         try {
-            console.log('[KBViewWidgetManager] Getting ribbon widget with ID:', KB_WIDGET_IDS.RIBBON);
             const ribbon = await this.widgetManager.getOrCreateWidget(KB_WIDGET_IDS.RIBBON);
-            console.log('[KBViewWidgetManager] Ribbon widget obtained:', ribbon?.id, 'isAttached:', ribbon?.isAttached);
             if (!ribbon.isAttached) {
-                // Add ribbon to left area - it will be styled to appear as a slim bar
-                console.log('[KBViewWidgetManager] Adding ribbon to left area...');
                 await this.shell.addWidget(ribbon, { area: 'left' });
-                console.log('[KBViewWidgetManager] Ribbon added to shell');
             }
             await this.shell.revealWidget(ribbon.id);
-            console.log('[KBViewWidgetManager] Ribbon revealed');
         } catch (error) {
-            console.error('[KBViewWidgetManager] Failed to open ribbon widget:', error);
+            console.error('Failed to open ribbon widget:', error);
         }
 
         // Open vault selector at the bottom of left sidebar
         try {
-            console.log('[KBViewWidgetManager] Getting vault selector widget with ID:', KB_WIDGET_IDS.VAULT_SELECTOR);
             const vaultSelector = await this.widgetManager.getOrCreateWidget(KB_WIDGET_IDS.VAULT_SELECTOR);
-            console.log('[KBViewWidgetManager] Vault selector widget obtained:', vaultSelector?.id, 'isAttached:', vaultSelector?.isAttached);
             if (!vaultSelector.isAttached) {
-                // Add vault selector to left area (will be styled at bottom)
-                console.log('[KBViewWidgetManager] Adding vault selector to left area...');
                 await this.shell.addWidget(vaultSelector, { area: 'left' });
-                console.log('[KBViewWidgetManager] Vault selector added to shell');
             }
             await this.shell.revealWidget(vaultSelector.id);
-            console.log('[KBViewWidgetManager] Vault selector revealed');
         } catch (error) {
-            console.error('[KBViewWidgetManager] Failed to open vault selector widget:', error);
+            console.error('Failed to open vault selector widget:', error);
         }
 
         // Open widgets in the right sidebar
@@ -194,9 +155,6 @@ export class KBViewWidgetManager implements FrontendApplicationContribution {
                 console.warn(`Failed to open KB widget ${widgetId}:`, error);
             }
         }
-
-        // Note: Graph widget is typically opened via command, not automatically
-        // Users can open it with "Knowledge Base: Show Graph" command
     }
 
     /**
