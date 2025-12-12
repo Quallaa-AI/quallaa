@@ -89,7 +89,19 @@ export class KBViewContribution extends DefaultFrontendApplicationContribution i
     protected readonly widgetManager: KBViewWidgetManager;
 
     registerCommands(commands: CommandRegistry): void {
-        console.log('[KBViewContribution] Registering KB View commands');
+        console.log('[KBViewContribution] registerCommands called');
+
+        // Force instantiation of widgetManager (it's lazy injected)
+        // This ensures KBViewWidgetManager is created and its @postConstruct runs
+        try {
+            const wm = this.widgetManager;
+            console.log('[KBViewContribution] Widget manager accessed successfully:', !!wm);
+        } catch (error) {
+            console.error('[KBViewContribution] Error accessing widgetManager:', error);
+        }
+
+        console.log('[KBViewContribution] About to register commands');
+
         commands.registerCommand(KBViewCommands.TOGGLE_MODE, {
             execute: async () => {
                 await this.viewModeService.toggleMode();

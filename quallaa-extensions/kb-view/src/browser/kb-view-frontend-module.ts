@@ -25,11 +25,13 @@
  */
 
 import '../../src/browser/style/ribbon.css';
+import '../../src/browser/vault-selector/vault-selector.css';
 
 import { ContainerModule } from '@theia/core/shared/inversify';
 import { CommandContribution, MenuContribution, PreferenceContribution } from '@theia/core/lib/common';
 import { FrontendApplicationContribution, WidgetFactory } from '@theia/core/lib/browser';
 import { LabelProviderContribution } from '@theia/core/lib/browser/label-provider';
+import { TabBarToolbarContribution } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
 
 // Core services
 import { ViewModeService, ViewModeServiceImpl } from './view-mode-service';
@@ -53,6 +55,10 @@ import { KB_VIEW_PREFERENCES_SCHEMA } from './kb-view-preferences';
 
 // Widgets
 import { RibbonWidget, RIBBON_WIDGET_ID } from './ribbon-widget';
+import { VaultSelectorWidget, VAULT_SELECTOR_WIDGET_ID } from './vault-selector/vault-selector-widget';
+
+// File tree toolbar (Obsidian-style icons)
+import { FileTreeToolbarContribution } from './file-tree-toolbar-contribution';
 
 export default new ContainerModule(bind => {
     console.log('[KB-VIEW] Frontend module loading...');
@@ -72,6 +78,8 @@ export default new ContainerModule(bind => {
     // UI services
     bind(KBViewFileOperations).toSelf().inSingletonScope();
     bind(KBViewWidgetManager).toSelf().inSingletonScope();
+    // Ensure KBViewWidgetManager is instantiated at startup
+    bind(FrontendApplicationContribution).toService(KBViewWidgetManager);
     bind(KBViewExtensionDetector).toSelf().inSingletonScope();
 
     // Filtering services
@@ -90,12 +98,26 @@ export default new ContainerModule(bind => {
     bind(CommandContribution).toService(KBViewCommandFilter);
     bind(MenuContribution).toService(KBViewMenuFilter);
 
+    // File tree toolbar contribution (Obsidian-style icons above file tree)
+    bind(FileTreeToolbarContribution).toSelf().inSingletonScope();
+    bind(CommandContribution).toService(FileTreeToolbarContribution);
+    bind(TabBarToolbarContribution).toService(FileTreeToolbarContribution);
+
     // Ribbon widget
     bind(RibbonWidget).toSelf();
     bind(WidgetFactory)
         .toDynamicValue(ctx => ({
             id: RIBBON_WIDGET_ID,
             createWidget: () => ctx.container.get<RibbonWidget>(RibbonWidget),
+        }))
+        .inSingletonScope();
+
+    // Vault selector widget
+    bind(VaultSelectorWidget).toSelf();
+    bind(WidgetFactory)
+        .toDynamicValue(ctx => ({
+            id: VAULT_SELECTOR_WIDGET_ID,
+            createWidget: () => ctx.container.get<VaultSelectorWidget>(VaultSelectorWidget),
         }))
         .inSingletonScope();
 

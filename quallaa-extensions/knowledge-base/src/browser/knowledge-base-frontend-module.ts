@@ -26,6 +26,7 @@ import '../../src/browser/editor/editor-styles.css';
 import { ContainerModule } from '@theia/core/shared/inversify';
 import { FrontendApplicationContribution, WidgetFactory, OpenHandler } from '@theia/core/lib/browser';
 import { CommandContribution, MenuContribution } from '@theia/core/lib/common';
+import { TabBarToolbarContribution } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
 import { URI } from '@theia/core/lib/common/uri';
 // eslint-disable-next-line deprecation/deprecation
 import { WebSocketConnectionProvider } from '@theia/core/lib/browser/messaging';
@@ -43,6 +44,8 @@ import { TagsWidget, TAGS_WIDGET_ID } from './tags/tags-widget';
 import { TagsContribution } from './tags/tags-contribution';
 import { MarkdownEditorWidget } from './editor/markdown-editor-widget';
 import { MarkdownEditorOpenHandler } from './editor/markdown-editor-open-handler';
+import { KBNavigationToolbarContribution } from './navigation/kb-navigation-toolbar-contribution';
+import { KBStatusBarContribution } from './status-bar/kb-status-bar-contribution';
 
 export default new ContainerModule(bind => {
     // Wiki link services - following Foam's pattern: LinkProvider handles everything
@@ -132,4 +135,12 @@ export default new ContainerModule(bind => {
     // Bind the Open Handler
     bind(MarkdownEditorOpenHandler).toSelf().inSingletonScope();
     bind(OpenHandler).toService(MarkdownEditorOpenHandler);
+
+    // --- Editor Navigation (Obsidian-style back/forward) ---
+    bind(KBNavigationToolbarContribution).toSelf().inSingletonScope();
+    bind(TabBarToolbarContribution).toService(KBNavigationToolbarContribution);
+
+    // --- Status Bar (Obsidian-style word/char count, backlinks) ---
+    bind(KBStatusBarContribution).toSelf().inSingletonScope();
+    bind(FrontendApplicationContribution).toService(KBStatusBarContribution);
 });

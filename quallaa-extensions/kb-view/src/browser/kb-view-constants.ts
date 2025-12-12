@@ -24,4 +24,6 @@ export const KB_WIDGET_IDS = {
     GRAPH: 'knowledge-base-graph-widget',
     TAGS: 'knowledge-base-tags-widget',
     BACKLINKS: 'knowledge-base-backlinks',
+    RIBBON: 'quallaa-ribbon',
+    VAULT_SELECTOR: 'quallaa-vault-selector',
 } as const;

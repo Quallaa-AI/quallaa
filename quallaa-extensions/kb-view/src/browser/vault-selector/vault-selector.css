@@ -1,0 +1,97 @@
+/********************************************************************************
+ * Copyright (C) 2025 Jeff Toffoli
+ *
+ * Vault selector styles - matches Obsidian's vault selector appearance
+ ********************************************************************************/
+
+.quallaa-vault-selector-widget {
+    display: flex;
+    flex-direction: column;
+    height: auto !important;
+    min-height: 36px;
+    background: var(--theia-sideBar-background);
+    border-top: 1px solid var(--theia-sideBarSectionHeader-border);
+}
+
+.quallaa-vault-selector-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 8px;
+    min-height: 32px;
+}
+
+.quallaa-vault-selector-vault-button {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex: 1;
+    min-width: 0;
+    background: transparent;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    color: var(--theia-foreground);
+    font-size: 12px;
+    text-align: left;
+}
+
+.quallaa-vault-selector-vault-button:hover {
+    background: var(--theia-toolbar-hoverBackground);
+}
+
+.quallaa-vault-selector-vault-button:focus {
+    outline: 1px solid var(--theia-focusBorder);
+    outline-offset: -1px;
+}
+
+.quallaa-vault-selector-vault-button .codicon {
+    font-size: 14px;
+    flex-shrink: 0;
+    color: var(--theia-icon-foreground);
+}
+
+.quallaa-vault-selector-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
+    min-width: 0;
+}
+
+.quallaa-vault-selector-actions {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    flex-shrink: 0;
+}
+
+.quallaa-vault-selector-action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: var(--theia-foreground);
+    opacity: 0.7;
+}
+
+.quallaa-vault-selector-action:hover {
+    background: var(--theia-toolbar-hoverBackground);
+    opacity: 1;
+}
+
+.quallaa-vault-selector-action:focus {
+    outline: 1px solid var(--theia-focusBorder);
+    outline-offset: -1px;
+    opacity: 1;
+}
+
+.quallaa-vault-selector-action .codicon {
+    font-size: 14px;
+}

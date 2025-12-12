@@ -27,6 +27,11 @@ yarn-error.log*
 # Test outputs
 test-results/
 playwright-report/
+screenshots/
+test-workspace/
+
+# TypeScript build cache
+*.tsbuildinfo
 
 # Distribution
 dist/

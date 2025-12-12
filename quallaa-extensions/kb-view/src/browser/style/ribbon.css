@@ -85,3 +85,18 @@
 .kb-view-mode .quallaa-ribbon-separator {
     background-color: var(--kb-border-subtle, #e8e4df);
 }
+
+/* Placeholder actions (Coming Soon features) */
+.quallaa-ribbon-action-placeholder {
+    opacity: 0.5;
+}
+
+.quallaa-ribbon-action-placeholder:hover {
+    opacity: 0.7;
+}
+
+/* Visual indicator for placeholder - subtle dashed border on hover */
+.quallaa-ribbon-action-placeholder:hover {
+    border: 1px dashed var(--theia-activityBar-foreground, #ffffff);
+    border-radius: 4px;
+}
