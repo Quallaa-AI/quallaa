@@ -110,7 +110,7 @@ export class KBViewWidgetManager implements FrontendApplicationContribution {
     }
 
     /**
-     * Switch to Developer mode - hide KB widgets
+     * Switch to Developer mode - hide KB widgets but keep Activity Bar functional
      */
     private async switchToDeveloper(): Promise<void> {
         // Save current state of KB widgets
@@ -118,32 +118,62 @@ export class KBViewWidgetManager implements FrontendApplicationContribution {
 
         // Close all KB widgets
         await this.closeKBWidgets();
+
+        // CRITICAL: Ensure the left panel (Activity Bar + sidebar) is visible
+        // This prevents the Activity Bar from disappearing when switching modes
+        try {
+            // Expand the left panel to ensure Activity Bar is accessible
+            if (this.shell.leftPanelHandler) {
+                this.shell.leftPanelHandler.expand();
+            }
+
+            // Try to reveal the Explorer widget to ensure something is in the sidebar
+            const explorerWidgetId = 'explorer-view-container';
+            const explorer = this.shell.getWidgets('left').find(w => w.id === explorerWidgetId || w.id.includes('explorer'));
+            if (explorer) {
+                await this.shell.revealWidget(explorer.id);
+            }
+        } catch (error) {
+            console.warn('Failed to ensure left panel is visible in Developer mode:', error);
+        }
     }
 
     private async openKBWidgets(): Promise<void> {
-        // Open ribbon widget in the left sidebar
+        // First, ensure the Explorer (file tree) is open in the left sidebar
+        // This is important for KB View mode to have the file tree visible
         try {
-            const ribbon = await this.widgetManager.getOrCreateWidget(KB_WIDGET_IDS.RIBBON);
-            if (!ribbon.isAttached) {
-                await this.shell.addWidget(ribbon, { area: 'left' });
+            // The Explorer widget ID in Theia is 'explorer-view-container'
+            const explorerWidgetId = 'explorer-view-container';
+
+            // Try to find the Explorer in the left sidebar
+            let explorer = this.shell.getWidgets('left').find(w => w.id === explorerWidgetId || w.id.includes('explorer'));
+
+            // If not found in left sidebar, try to get or create it
+            if (!explorer) {
+                try {
+                    explorer = await this.widgetManager.getOrCreateWidget(explorerWidgetId);
+                    if (explorer && !explorer.isAttached) {
+                        await this.shell.addWidget(explorer, { area: 'left' });
+                    }
+                } catch {
+                    // Explorer widget factory might not be registered, that's OK
+                }
             }
-            await this.shell.revealWidget(ribbon.id);
+
+            // Reveal the Explorer if found
+            if (explorer) {
+                await this.shell.revealWidget(explorer.id);
+            }
+
+            // Ensure the left panel is expanded (critical for showing file tree)
+            if (this.shell.leftPanelHandler) {
+                this.shell.leftPanelHandler.expand();
+            }
         } catch (error) {
-            console.error('Failed to open ribbon widget:', error);
+            console.warn('Failed to open Explorer:', error);
         }
 
-        // Open vault selector at the bottom of left sidebar
-        try {
-            const vaultSelector = await this.widgetManager.getOrCreateWidget(KB_WIDGET_IDS.VAULT_SELECTOR);
-            if (!vaultSelector.isAttached) {
-                await this.shell.addWidget(vaultSelector, { area: 'left' });
-            }
-            await this.shell.revealWidget(vaultSelector.id);
-        } catch (error) {
-            console.error('Failed to open vault selector widget:', error);
-        }
-
-        // Open widgets in the right sidebar
+        // Open widgets in the right sidebar (Tags, Backlinks)
         for (const widgetId of [KB_WIDGET_IDS.BACKLINKS, KB_WIDGET_IDS.TAGS]) {
             try {
                 const widget = await this.widgetManager.getOrCreateWidget(widgetId);
@@ -155,6 +185,9 @@ export class KBViewWidgetManager implements FrontendApplicationContribution {
                 console.warn(`Failed to open KB widget ${widgetId}:`, error);
             }
         }
+
+        // Note: Vault Selector is now positioned via CSS fixed positioning at bottom of left sidebar
+        // It's added to the left area but CSS handles the actual positioning
     }
 
     /**

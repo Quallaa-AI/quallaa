@@ -420,6 +420,10 @@ export class LayoutManagerImpl implements LayoutManager {
      */
 
     private applyCSSClass(layoutId: LayoutId, config?: LayoutConfig): void {
+        // Always remove both mode classes first to ensure clean state
+        document.body.classList.remove('kb-view-mode');
+        document.body.classList.remove('developer-mode');
+
         // Built-in layouts have their mode class (kb-view-mode, developer-mode)
         const builtInLayout = BUILT_IN_LAYOUTS[layoutId];
         if (builtInLayout) {
@@ -430,24 +434,18 @@ export class LayoutManagerImpl implements LayoutManager {
 
             // Apply the base mode class based on config
             if (config?.baseMode === 'kb-view') {
-                document.body.classList.remove('developer-mode');
                 document.body.classList.add('kb-view-mode');
             } else {
-                document.body.classList.remove('kb-view-mode');
                 document.body.classList.add('developer-mode');
             }
         }
     }
 
     private removeCSSClass(layoutId: LayoutId): void {
-        const builtInLayout = BUILT_IN_LAYOUTS[layoutId];
-        if (builtInLayout) {
-            document.body.classList.remove(builtInLayout.cssClass!);
-        } else {
-            // Custom layouts: remove both custom class and mode classes
-            document.body.classList.remove(`custom-layout-${layoutId}`);
-            // Mode classes will be replaced by the new layout's mode
-        }
+        // Remove custom layout class if it exists
+        document.body.classList.remove(`custom-layout-${layoutId}`);
+        // Note: Mode classes (kb-view-mode, developer-mode) are managed by applyCSSClass
+        // which always removes both before adding the new one
     }
 
     /**
